@@ -21,6 +21,10 @@ This function invokes a pry debugging session in the current scope object. This 
    ## Run `cd catalog` and `ls` to see catalog methods and instance variables
    ## Run `@resource_table` to see the current catalog resource table
    #
-   binding.pry
+   if $stdout.isatty
+    binding.pry
+   else
+    Puppet.warning 'pry(): cowardly refusing to start the debugger on a daemonized master'
+   end
  end
 end
